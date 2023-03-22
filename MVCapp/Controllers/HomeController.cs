@@ -8,6 +8,12 @@ namespace MVCapp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+        public ViewResult Greet(string name)
+        {
+            string message = "Hello, " + name + "!";
+            ViewBag.Message = message;
+            return View();
+        }
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
