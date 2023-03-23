@@ -1,0 +1,13 @@
+﻿@using MVCapp.Models;
+@model GreetHomeViewModel
+@{
+	ViewData["Title"] = "Main Page";
+}
+
+<form method="post" class="text-center" asp-controller="Home" asp-action="Greet">
+	<label asp-for="Name">Enter your name:</label>
+	<input asp-for="Name" type="text" id="name" />
+	<button type="submit">Submit</button>
+	<br />
+	<span asp-validation-for="Name" class="text-danger"></span>
+</form>

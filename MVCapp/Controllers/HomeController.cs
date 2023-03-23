@@ -6,33 +6,30 @@ namespace MVCapp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+		public IActionResult Index()
+		{
+			return RedirectToAction("Greet");
+		}
 
-        public ViewResult Greet(string name)
-        {
-            string message = "Hello, " + name + "!";
-            ViewBag.Message = message;
-            return View();
-        }
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+		public IActionResult Greet()
+		{
+			return View("GreetGet");
+		}
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+		[HttpPost]
+		public IActionResult Greet(GreetHomeViewModel greetHomeViewModel)
+		{
+			if (!ModelState.IsValid)
+			{
+				return View("GreetGet", greetHomeViewModel);
+			}
+			return View("GreetPost", greetHomeViewModel);
+		}
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-    }
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+		public IActionResult Error()
+		{
+			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+		}
+	}
 }
